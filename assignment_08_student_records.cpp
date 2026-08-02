@@ -1,7 +1,7 @@
 // =============================================================================
 // PROGRAMMING FUNDAMENTALS — Assignment 8
-// =============================================================================
-//
+// ========#include <iostream>
+
 // TASK: Student Record Management System
 //
 // Build a console-based program that stores and manages student information.
@@ -83,3 +83,144 @@
 #include <iomanip>
 using namespace std;
 
+#include <iostream>
+#include <vector>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+// Define a struct called Student as required
+struct Student {
+    string name;
+    string id;
+    vector<double> scores;
+};
+
+// Helper function to calculate average score of a student
+double calculateAverage(const vector<double>& scores) {
+    if (scores.empty()) return 0.0;
+    double sum = 0;
+    for (double score : scores) {
+        sum += score;
+    }
+    return sum / scores.size();
+}
+
+// Display menu options
+void displayMenu() {
+    cout << "====================================\n";
+    cout << "    STUDENT RECORD SYSTEM MENU      \n";
+    cout << "====================================\n";
+    cout << "1. Add student\n";
+    cout << "2. Display all students\n";
+    cout << "3. Calculate average score\n";
+    cout << "4. Quit\n";
+    cout << "====================================\n";
+}
+
+// Option 1: Add a new student record
+void addStudent(vector<Student>& students) {
+    Student newStudent;
+
+    cout << "Student name: ";
+    cin.ignore();
+    getline(cin, newStudent.name);
+
+    cout << "Student ID: ";
+    cin >> newStudent.id;
+
+    int numScores;
+    cout << "How many scores? ";
+    cin >> numScores;
+
+    for (int i = 1; i <= numScores; i++) {
+        double score;
+        cout << "Enter score " << i << ": ";
+        cin >> score;
+        newStudent.scores.push_back(score);
+    }
+
+    students.push_back(newStudent);
+    cout << "Student \"" << newStudent.name << "\" added successfully.\n";
+}
+
+// Option 2: Display formatted table of all student records
+void displayAllStudents(const vector<Student>& students) {
+    if (students.empty()) {
+        cout << "No students have been added yet.\n";
+        return;
+    }
+
+    cout << "\n------------------------------------------------------------\n";
+    cout << left << setw(20) << "Name" 
+         << setw(15) << "ID" 
+         << setw(15) << "Average" << "\n";
+    cout << "------------------------------------------------------------\n";
+
+    for (const auto& student : students) {
+        double avg = calculateAverage(student.scores);
+        cout << left << setw(20) << student.name 
+             << setw(15) << student.id 
+             << fixed << setprecision(2) << setw(15) << avg << "\n";
+    }
+    cout << "------------------------------------------------------------\n";
+}
+
+// Option 3: Calculate & display average score for a specific student ID
+void calculateStudentAverage(const vector<Student>& students) {
+    if (students.empty()) {
+        cout << "No students have been added yet.\n";
+        return;
+    }
+
+    string searchID;
+    cout << "Enter student ID: ";
+    cin >> searchID;
+
+    bool found = false;
+    for (const auto& student : students) {
+        if (student.id == searchID) {
+            double avg = calculateAverage(student.scores);
+            cout << student.name << "'s average score: " 
+                 << fixed << setprecision(2) << avg << "\n";
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        cout << "Error: Student ID " << searchID << " not found.\n";
+    }
+}
+
+int main() {
+    vector<Student> students;
+    int choice = 0;
+
+    while (choice != 4) {
+        displayMenu();
+        cout << "Enter your choice (1-4): ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                addStudent(students);
+                break;
+            case 2:
+                displayAllStudents(students);
+                break;
+            case 3:
+                calculateStudentAverage(students);
+                break;
+            case 4:
+                cout << "Goodbye!\n";
+                break;
+            default:
+                cout << "Invalid choice! Please enter a number between 1 and 4.\n";
+                break;
+        }
+        cout << "\n";
+    }
+
+    return 0;
+}

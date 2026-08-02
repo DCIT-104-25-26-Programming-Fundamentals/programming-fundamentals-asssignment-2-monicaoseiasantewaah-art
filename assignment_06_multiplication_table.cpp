@@ -1,5 +1,7 @@
 // =============================================================================
 // PROGRAMMING FUNDAMENTALS — Assignment 6
+    cin >> n;
+    cin >> n;
 // =============================================================================
 //
 // TASK: Multiplication Table Generator
@@ -8,8 +10,7 @@
 // and functions.
 //
 // -----------------------------------------------------------------------------
-// PART A — Single Table
-// -----------------------------------------------------------------------------
+// PART A — Single Table--------------------------------------------
 // - Ask the user to enter a number.
 // - Print the multiplication table for that number from 1 to 12.
 //
@@ -57,3 +58,62 @@
 #include <iostream>
 using namespace std;
 
+#include <iostream>
+using namespace std;
+
+// Function to print a single multiplication table from 1 to 12
+void printTable(int num) {
+    cout << "Multiplication table for " << num << ":\n";
+    for (int i = 1; i <= 12; i++) {
+        cout << num << " x " << i << " = " << (num * i) << "\n";
+    }
+}
+
+// PART A - Single Table
+void partA_SingleTable() {
+    int n;
+    cout << "Enter a number: ";
+    cin >> n;
+
+    // Requirement: N must be a positive integer
+    if (n <= 0) {
+        cout << "Error: Number must be a positive integer." << endl;
+        return;
+    }
+
+    printTable(n);
+}
+
+// PART B - Bonus: Tables from 1 to N
+void partB_MultipleTables() {
+    int n;
+    cout << "\nEnter a number N: ";
+    cin >> n;
+
+    // Requirement: N must be a positive integer
+    if (n <= 0) {
+        cout << "Error: N must be a positive integer." << endl;
+        return;
+    }
+
+    for (int i = 1; i <= n; i++) {
+        printTable(i);
+        
+        // Add separator between tables (except after the last table)
+        if (i < n) {
+            cout << "----------------------------------------\n";
+        }
+    }
+}
+
+int main() {
+    // Execute Part A
+    cout << "--- PART A ---\n";
+    partA_SingleTable();
+
+    // Execute Part B
+    cout << "\n--- PART B ---\n";
+    partB_MultipleTables();
+
+    return 0;
+}

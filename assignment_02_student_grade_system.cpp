@@ -1,6 +1,7 @@
 // =============================================================================
 // PROGRAMMING FUNDAMENTALS — Assignment 2
-// =============================================================================
+// =
+============================================================================
 //
 // TASK: Student Grade System
 //
@@ -46,3 +47,79 @@
 #include <iostream>
 using namespace std;
 
+#include <iostream>
+using namespace std;
+
+// Function to calculate letter grade based on score
+char getGrade(int score) {
+    // Validate range: score must be between 0 and 100 inclusive
+    if (score < 0 || score > 100) {
+        return '\0'; // Return null character for out-of-range input
+    }
+    
+    // Determine letter grade using if / else if / else
+    if (score >= 80) {
+        return 'A';
+    } else if (score >= 70) {
+        return 'B';
+    } else if (score >= 60) {
+        return 'C';
+    } else if (score >= 50) {
+        return 'D';
+    } else {
+        return 'F';
+    }
+}
+
+int main() {
+    int score;
+
+    cout << "Enter student score (0-100): ";
+    cin >> score;
+
+    char grade = getGrade(score);
+
+    // Check if score was invalid (returned null character '\0')
+    if (grade == '\0') {
+        cout << "Error: Score must be between 0 and 100." << endl;
+    } else {
+        cout << "Grade: " << grade << endl;
+    }
+#include <iostream>
+using namespace std;
+
+// Function to calculate letter grade based on score
+char getGrade(int score) {
+    // Validate range: score must be between 0 and 100 inclusive
+    if (score < 0 || score > 100) {
+        return '\0'; // Return null character for out-of-range input
+    }
+    
+    // Determine letter grade using if / else if / else
+    if (score >= 80) {
+        return 'A';
+    } else if (score >= 70) {
+        return 'B';
+    } else if (score >= 60) {
+        return 'C';
+    } else if (score >= 50) {
+        return 'D';
+    } else {
+        return 'F';
+    }
+}
+
+int main() {
+    int score;
+
+    cout << "Enter student score (0-100): ";
+    cin >> score;
+
+    char grade = getGrade(score);
+
+    // Check if score was invalid (returned null character '\0')
+    if (grade == '\0') {
+        cout << "Error: Score must be between 0 and 100." << endl;
+    } else {
+        cout << "Grade: " << grade << endl;
+    }

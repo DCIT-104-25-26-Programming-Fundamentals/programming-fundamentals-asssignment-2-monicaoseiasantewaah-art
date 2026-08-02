@@ -42,3 +42,82 @@
 #include <iostream>
 using namespace std;
 
+#include <iostream>
+using namespace std;
+
+// Function to calculate the sum of elements using a loop
+int calculateSum(const int arr[], int size) {
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+        sum += arr[i];
+    }
+    return sum;
+}
+
+// Function to calculate the average using a loop/sum
+double calculateAverage(const int arr[], int size) {
+    int sum = calculateSum(arr, size);
+    return static_cast<double>(sum) / size;
+}
+
+// Function to find the maximum value using a loop
+int findMax(const int arr[], int size) {
+    int maxVal = arr[0];
+    for (int i = 1; i < size; i++) {
+        if (arr[i] > maxVal) {
+            maxVal = arr[i];
+        }
+    }
+    return maxVal;
+}
+
+// Function to find the minimum value using a loop
+int findMin(const int arr[], int size) {
+    int minVal = arr[0];
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < minVal) {
+            minVal = arr[i];
+        }
+    }
+    return minVal;
+}
+
+int main() {
+    int count;
+
+    cout << "How many numbers? ";
+    cin >> count;
+
+    // Requirement: N must be a positive integer.
+    if (count <= 0) {
+        cout << "Error: Number of elements must be a positive integer." << endl;
+        return 0; // Stop execution
+    }
+
+    // Dynamic array allocation based on user input size
+    int* numbers = new int[count];
+
+    // Read input elements
+    for (int i = 0; i < count; i++) {
+        cout << "Enter number " << (i + 1) << ": ";
+        cin >> numbers[i];
+    }
+
+    // Compute results using separate helper functions
+    int sum = calculateSum(numbers, count);
+    double avg = calculateAverage(numbers, count);
+    int maxVal = findMax(numbers, count);
+    int minVal = findMin(numbers, count);
+
+    // Print results formatted as requested
+    cout << "\nResults:\n";
+    cout << "Sum: " << sum << endl;
+    cout << "Average: " << avg << endl;
+    cout << "Maximum: " << maxVal << endl;
+    cout << "Minimum: " << minVal << endl;
+
+    // Free dynamically allocated memory
+    delete[] numbers;
+
+    return 0;
+}
